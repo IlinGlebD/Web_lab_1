@@ -1,0 +1,123 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: lightgoldenrodyellow;
+    color: black;
+}
+
+header {
+    background-color: black;
+    color: white;
+    text-align: left;
+    padding: 15px;
+}
+
+footer {
+    background-color: black;
+    color: white;
+    text-align: right;
+    padding: 15px;
+}
+
+h1, h2 {
+    text-align: center;
+    color: gray;
+}
+
+/* Стили для параграфов */
+.style1 {
+    background-color: lightpink;
+    color: black;
+    font-size: 18px;
+    line-height: 1.6;
+    padding: 15px;
+    text-align: justify;
+    box-shadow: 5px 5px 10px rgba(238, 4, 4, 0.2);
+}
+
+.style2 {
+    background-color: lightgreen;
+    color: blue;
+    font-size: 17px;
+    line-height: 1.5;
+    padding: 12px;
+    text-align: left;
+}
+
+.style3 {
+    background-color: lightgray;
+    color: black;
+    font-size: 19px;
+    line-height: 1.7;
+    padding: 18px;
+    text-align: justify;
+    box-shadow: 8px 8px 15px rgba(88, 6, 182, 0.15);
+}
+
+.style4 {
+    background-color: papayawhip;
+    color: navy;
+    font-size: 18px;
+    line-height: 1.8;
+    padding: 15px;
+    text-align: center;
+}
+
+.style5 {
+    background-color: yellowgreen;
+    color: black;
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 14px;
+    text-align: right;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.style6 {
+    background-color: lightblue;
+    color: black;
+    font-size: 17px;
+    line-height: 1.6;
+    padding: 10px;
+    text-align: justify;
+}
+
+.style7 {
+    background-color: lightskyblue;
+    color: brown;
+    font-size: 18px;
+    line-height: 1.7;
+    padding: 16px;
+    text-align: justify;
+    box-shadow: 10px 10px 14px rgba(250, 3, 3, 0.3);
+}
+
+.style8 {
+    background-color: blueviolet;
+    color: pink;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 15px;
+    line-height: 2;
+    padding: 10px;
+    text-align: justify;
+}
+
+.style9 {
+    background-color: navajowhite;
+    color: grey;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+    font-size: 20px;
+    line-height: 1;
+    padding: 30px;
+    text-align: justify;
+}
+
+.style10 {
+    background-color: red;
+    color:  black;
+    font-size: 20px;
+    line-height: 0.5;
+    padding: 25px;
+    text-align: left;
+}
