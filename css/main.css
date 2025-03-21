@@ -49,6 +49,7 @@ a:hover {
     color: red;
     text-decoration: underline;
     font-size: 20px;
+    text-shadow: 50px 50px 50px rgba(rgb(15, 0, 128));
     transition: 0.3s;
 }
 
