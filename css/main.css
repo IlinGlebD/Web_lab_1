@@ -27,6 +27,12 @@ footer {
     text-align: right;
 }
 
+a {
+    color: black;
+    text-decoration: none;
+    transition: 1s 2s;
+}
+
 a:link {
     color:brown;
     text-decoration: none;
@@ -43,6 +49,7 @@ a:hover {
     color: red;
     text-decoration: underline;
     font-size: 20px;
+    transition: 0.3s;
 }
 
 a:active {
