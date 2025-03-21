@@ -27,6 +27,25 @@ footer {
     text-align: right;
 }
 
-a {
+a:link {
+    color:brown;
     text-decoration: none;
+    font-size: 20px;
+}
+
+a:visited {
+    color: navy;
+    text-decoration: underline;
+    font-size: 30px;
+}
+
+a:hover {
+    color: red;
+    text-decoration: underline;
+    font-size: 20px;
+}
+
+a:active {
+    color: black;
+    opacity: 0.3;
 }
