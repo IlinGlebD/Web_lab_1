@@ -48,6 +48,8 @@ a:visited {
 a:hover {
     color: red;
     text-decoration: underline;
+    background-color: yellow;
+    text-shadow: 10px 10px 10px green;
     font-size: 20px;
     text-shadow: 50px 50px 50px rgba(rgb(15, 0, 128));
     transition: 0.3s;
