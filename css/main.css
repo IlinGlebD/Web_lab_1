@@ -10,6 +10,7 @@ main {
     color: black;
     font-family: 'Times New Roman', Times, serif;
     padding: 20px;
+    margin: 0 0 45px;
 }
 
 header {
@@ -25,6 +26,10 @@ footer {
     padding: 20px; 
     font-size: italic; 
     text-align: right;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 
 a {
