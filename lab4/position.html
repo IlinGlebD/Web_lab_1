@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ильин Глеб Дмитриевич. Позиция</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="shortcut icon" href="../favicon/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon/favicon-16x16.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon/favicon-32x32.png" type="image/x-icon">
+    <style>
+        div {
+            width: 300px;
+            height: 70px;
+            background-color: white;
+            line-height: 70px;
+            text-align: center;
+            border: 1px dotted darkgreen;
+            margin: 15px;
+        }
+        .position-relative {
+            position: relative;
+            left: 160px;
+            bottom: 130px;
+            z-index: 0;
+        }
+        .position-relative:hover {
+            z-index: 10;
+        }
+        .static {
+            z-index: 5;
+            position: relative;
+        }
+        .position-absolute {
+            position: absolute;
+            left: 300px;
+        }
+        .position-absolute:hover {
+            background-color: aqua;
+            color: red;
+            box-shadow: 10px 10px 20px greenyellow;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 4
+    </header>
+
+    <main>
+        <div class="static">static</div>
+        <div class="static">static</div>
+        <div class="position-relative">relative</div>
+        <div>static</div>
+        <div>static</div>
+        <div class="position-absolute">absolute</div>
+        <div>static</div>
+        <div>static</div>
+        <div>static</div>
+        <div>static</div>
+    </main>
+    
+    <footer>
+        &copy; Ильин Глеб, ФБИ-32, 2 курс, 2025
+    </footer>
+</body>
+</html>
