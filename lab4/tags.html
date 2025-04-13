@@ -9,126 +9,157 @@
     <link rel="shortcut icon" href="../favicon/favicon-16x16.png" type="image/x-icon">
     <link rel="shortcut icon" href="../favicon/favicon-32x32.png" type="image/x-icon">
     <style>
-    .tag {
-      position: absolute;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      font-weight: bold;
-    }
+        @keyframes float1 {
+            0% { transform: translate(0, 0) rotate(-10deg); }
+            50% { transform: translate(20px, -30px) rotate(0deg); }
+            100% { transform: translate(0, 0) rotate(-10deg); }
+        }
 
-    .tag:hover {
-      transform: scale(1.5);
-      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-      z-index: 999;
-    }
+        @keyframes float2 {
+            0% { transform: translate(0, 0) rotate(5deg); }
+            50% { transform: translate(-15px, 25px) rotate(10deg); }
+            100% { transform: translate(0, 0) rotate(5deg); }
+        }
+        .tag {
+            position: absolute;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-weight: bold;
+            animation-duration: 6s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+            animation-play-state: running;
+        }
 
-    .tag1 { 
-        color: magenta;  
-        font-size: 50px; 
-        left: 300px;  
-        top: 450px;  
-        transform: rotate(-10deg); 
-    }
-    .tag2 { 
-        color: green;    
-        font-size: 60px; 
-        left: 260px; 
-        top: 310px;  
-        transform: rotate(5deg); 
-    }
-    .tag3 { 
-        color: orange;   
-        font-size: 100px; 
-        left: 1100px; 
-        top: 60px;  
-        transform: rotate(15deg); 
-    }
-    .tag4 { 
-        color: blue;     
-        font-size: 200px; 
-        left: 500px;
-        top: 160px; 
-        transform: rotate(-5deg); 
-    }
-    .tag5 { 
-        color: red;      
-        font-size: 90px; 
-        left: 250px; 
-        top: 120px; 
-        transform: 
-        rotate(10deg); 
-    }
-    .tag6 { 
-        color: purple;  
-        font-size: 70px; 
-        left: 100px; 
-        top: 180px; 
-        transform: 
-        rotate(-15deg); 
-    }
-    .tag7 { 
-        color: teal;     
-        font-size: 50px; 
-        left: 1200px;  
-        top: 240px; 
-        transform: rotate(12deg); 
-    }
-    .tag8 { 
-        color: brown;    
-        font-size: 30px; 
-        left: 1000px; 
-        top: 300px; 
-        transform: rotate(-8deg); 
-    }
-    .tag9 { 
-        color: navy;     
-        font-size: 70px; 
-        left: 900px; 
-        top: 400px; 
-        transform: rotate(7deg); 
-    }
-    .tag10{ 
-        color: gold;     
-        font-size: 40px; 
-        left: 1200px; 
-        top: 500px; 
-        transform: rotate(-12deg); 
-    }
-    .tag11{ 
-        color: black;    
-        font-size: 60px; 
-        left: 750px; 
-        top: 500px; 
-        transform: rotate(9deg); 
-    }
-    .tag12{ 
-        color: darkred;  
-        font-size: 100px; 
-        left: 420px; 
-        top: 340px; 
-        transform: rotate(-7deg); 
-    }
-    .tag13{ 
-        color: darkblue; 
-        font-size: 80px; 
-        left: 1250px; 
-        top: 370px; 
-        transform: rotate(11deg); 
-    }
-    .tag14{ 
-        color: salmon;   
-        font-size: 40px; 
-        left: 500px; 
-        top: 550px; 
-        transform: rotate(-6deg); 
-    }
-    .tag15{ 
-        color: darkgreen;
-        font-size: 35px; 
-        left: 80px;  
-        top: 420px; 
-        transform: rotate(13deg); 
-    }
+        .tag:hover {
+            animation-play-state: paused;
+            transform: scale(1.5);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .tag1 { 
+            color: magenta;  
+            font-size: 50px; 
+            left: 300px;  
+            top: 450px;  
+            transform: rotate(-10deg); 
+            animation-name: float1;
+        }
+        .tag2 { 
+            color: green;    
+            font-size: 60px; 
+            left: 260px; 
+            top: 310px;  
+            transform: rotate(5deg);
+            animation-name: float2;
+        }
+        .tag3 { 
+            color: orange;   
+            font-size: 100px; 
+            left: 1100px; 
+            top: 60px;  
+            transform: rotate(15deg);
+            animation-name: float1;
+        }
+        .tag4 { 
+            color: blue;     
+            font-size: 200px; 
+            left: 500px;
+            top: 160px; 
+            transform: rotate(-5deg);
+            animation-name: float2;
+        }
+        .tag5 { 
+            color: red;      
+            font-size: 90px; 
+            left: 250px; 
+            top: 120px; 
+            transform: 
+            rotate(10deg);
+            animation-name: float1;
+        }
+        .tag6 { 
+            color: purple;  
+            font-size: 70px; 
+            left: 100px; 
+            top: 180px; 
+            transform: 
+            rotate(-15deg);
+            animation-name: float2;
+        }
+        .tag7 { 
+            color: teal;     
+            font-size: 50px; 
+            left: 1200px;  
+            top: 240px; 
+            transform: rotate(12deg);
+            animation-name: float1; 
+        }
+        .tag8 { 
+            color: brown;    
+            font-size: 30px; 
+            left: 1000px; 
+            top: 300px; 
+            transform: rotate(-8deg);
+            animation-name: float2;
+        }
+        .tag9 { 
+            color: navy;     
+            font-size: 70px; 
+            left: 900px; 
+            top: 400px; 
+            transform: rotate(7deg);
+            animation-name: float2;
+        }
+        .tag10{ 
+            color: gold;     
+            font-size: 40px; 
+            left: 1200px; 
+            top: 500px; 
+            transform: rotate(-12deg);
+            animation-name: float1;
+        }
+        .tag11{ 
+            color: black;    
+            font-size: 60px; 
+            left: 750px; 
+            top: 500px; 
+            transform: rotate(9deg);
+            animation-name: float2;
+        }
+        .tag12{ 
+            color: darkred;  
+            font-size: 100px; 
+            left: 420px; 
+            top: 340px; 
+            transform: rotate(-7deg);
+            animation-name: float1;
+        }
+        .tag13{ 
+            color: darkblue; 
+            font-size: 80px; 
+            left: 1250px; 
+            top: 370px; 
+            transform: rotate(11deg);
+            animation-name: float2;
+        }
+        .tag14{ 
+            color: salmon;   
+            font-size: 40px; 
+            left: 500px; 
+            top: 550px; 
+            transform: rotate(-6deg);
+            animation-name: float1;
+        }
+        .tag15{ 
+            color: darkgreen;
+            font-size: 35px; 
+            left: 80px;  
+            top: 420px; 
+            transform: rotate(13deg);
+            animation-name: float2;
+        }
     </style>
 </head>
 <body>
