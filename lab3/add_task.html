@@ -10,8 +10,15 @@
     <link rel="shortcut icon" href="../favicon/favicon-32x32.png" type="image/x-icon">
     <style>
         div.change div {
-            display: none;
+            max-height: 0;
+            overflow: hidden;
+            text-align: justify;
+            text-indent: 2cm;
+            font-size: 14pt;
+            line-height: 1.5;
+            transition: 1s;
         }
+
         .change {
             border: 5px solid gray;
             border-radius: 10px;
@@ -24,22 +31,22 @@
             cursor: pointer;
             transition: 1s;
         }
+
         .change:hover {
             width: 65%;
-            padding: 20px;
+            padding: 25px;
             background-color: #eee;
             box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.3);
             border-radius: 20px;
-            border: 0;
+            border: none;
             transition: 2s;
         }
+
         .change:hover div {
-            display: block;
-            text-align: justify;
-            text-indent: 2cm;
-            font-size: 14pt;
-            line-height: 1.5;
+            max-height: 500px;
+            transition: 3s;
         }
+
         .change:hover h1 {
             color: blue;
         }
