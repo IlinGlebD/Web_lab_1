@@ -22,13 +22,13 @@
         }
         .tag {
             position: absolute;
-            transition: all 0.3s ease;
+            transition: 0.3s;
             cursor: pointer;
             font-weight: bold;
-            animation-duration: 6s;
-            animation-iteration-count: infinite;
-            animation-timing-function: ease-in-out;
-            animation-play-state: running;
+            animation-duration: 6s; /* цикл анимации */
+            animation-iteration-count: infinite; /* бесконечный повтор */
+            animation-timing-function: ease-in-out; /* анимация ускоряется в начале и замедляется в конце */
+            animation-play-state: running; /* анимация запущена по умолчанию */
         }
 
         .tag:hover {
@@ -75,8 +75,7 @@
             font-size: 90px; 
             left: 250px; 
             top: 120px; 
-            transform: 
-            rotate(10deg);
+            transform: rotate(10deg);
             animation-name: float1;
         }
         .tag6 { 
@@ -84,8 +83,7 @@
             font-size: 70px; 
             left: 100px; 
             top: 180px; 
-            transform: 
-            rotate(-15deg);
+            transform: rotate(-15deg);
             animation-name: float2;
         }
         .tag7 { 
