@@ -15,7 +15,6 @@
           display: flex;  /* флекс контейнер */
           align-items: center;  /* выравнивание по центру по вертикали */
           justify-content: center;  /* выравнивание по центру по горизонтали */
-          font-family: sans-serif;
       }
 
       .panel {
@@ -31,6 +30,7 @@
           font-size: 20px;
           color: brown;
           margin-bottom: 10px;
+          font-family: sans-serif;
       }
 
       .progress-bar {
@@ -59,6 +59,7 @@
           user-select: none;  /* запрещение выделения текста */
           transition: 0.3s;
           box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+          font-family: sans-serif;
       }
 
       .hold-button:hover {
@@ -88,16 +89,18 @@
     <header>
         НГТУ, ФБ, Лабораторная работа 4
     </header>
-
-  <div class="panel">
-    <div class="title">Степень прогресса</div>
     
-    <div class="progress-bar">
-      <div class="progress-fill"></div>
-    </div>
-
-    <div class="hold-button">Нажмите и удерживайте</div>
-  </div>
+    <main>
+      <div class="panel">
+        <div class="title">Степень прогресса</div>
+        
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+    
+        <div class="hold-button">Нажмите и удерживайте</div>
+      </div>
+    </main>
 
   <footer>
     &copy; Ильин Глеб, ФБИ-32, 2 курс, 2025
