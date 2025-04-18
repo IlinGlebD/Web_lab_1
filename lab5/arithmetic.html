@@ -16,8 +16,26 @@
             let result = a + b;
             alert('Сумма ' + a + ' и' + b + ' равна ' + result);
         }
+
+        function showAuthor() {
+            let author = 'Автор страницы:\nИльин Глеб Дмитриевич';
+            alert(author);
+        }
+
+        function showWelcome() {
+            let welcome = 'Добро пожаловать на мою страницу!\nИзучай, развивайся, преуспевай!';
+            alert(welcome);
+        }
     </script>
     <style>
+        header {
+            cursor: pointer;
+        }
+
+        footer {
+            cursor: pointer;
+        }
+
         .message {
             border: 2px solid green;
             border-radius: 5px;
@@ -35,16 +53,16 @@
     </style>
 </head>
 <body>
-    <header>
+    <header onclick="showAuthor()">
         НГТУ, ФБ, Лабораторная работа 5
     </header>
 
     <main>
         <div class="message" onclick="showSum()">Сколько будет 5154+7891?</div>
-        <div class="message">Узнать, кто автор страницы</div>
+        <div class="message" onclick="showAuthor()">Узнать, кто автор страницы</div>
     </main>
 
-    <footer>
+    <footer ondblclick="showWelcome()">
         &copy; Ильин Глеб, ФБИ-32, 2 курс, 2025
     </footer>
 </body>
