@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ильин Глеб Дмитриевич. Фильтры</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="shortcut icon" href="../favicon/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon/favicon-16x16.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon/favicon-32x32.png" type="image/x-icon">
+    <script>
+        function blurChange() {
+            let value = document.getElementById('blurValue').value + 'px';
+            document.getElementById('blurOutput').innerText = value;
+            document.getElementById('photo').style.filter = 'blur(' + value + ')';
+        }
+    </script>
+
+    <style>
+        img {
+            width: 1000px;
+            height: 500px;
+            text-align: center;
+        }
+
+        .filter {
+            font-size: 20px;
+            color: maroon;
+            margin: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 5
+    </header>
+
+    <main>
+        <div class="filter">
+            <div style="margin: 10px;">
+                Фильтр blur:
+                <input type="range" min="0" max="20" value="0" onchange="blurChange()" id="blurValue">
+                <span id="blurOutput"></span>
+            </div>
+        </div>
+        <div><img src="../picture/orig.webp" id="photo"></div>
+    </main>
+
+    <footer>
+        &copy; Ильин Глеб, ФБИ-32, 2 курс, 2025
+    </footer>
+</body>
+</html>
