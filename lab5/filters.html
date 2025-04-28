@@ -12,12 +12,15 @@
         function updateFilters() {
             let blur = document.getElementById('blur').value;
             let brightness = document.getElementById('brightness').value;
+            let contrast = document.getElementById('contrast').value;
 
             document.getElementById('blurOutput').innerText = blur + 'px';
             document.getElementById('brightnessOutput').innerText = brightness + '%';
+            document.getElementById('contrastOutput').innerText = contrast + '%';
 
             document.getElementById('photo').style.filter = 
-            'blur(' + blur + 'px) ' + 'brightness(' + brightness + '%) '
+            'blur(' + blur + 'px) ' + 'brightness(' + brightness + '%) ' + 
+            'contrast(' + contrast + '%) '
         }
     </script>
 
@@ -52,6 +55,12 @@
             Brightness:
             <input type="range" min="0" max="500" value="100" id="brightness" oninput="updateFilters()">
             <span id="brightnessOutput"></span>
+        </div>
+
+        <div class="filter">
+            Contrast:
+            <input type="range" min="0" max="500" value="100" id="contrast" oninput="updateFilters()">
+            <span id="contrastOutput"></span>
         </div>
             
         <div><img src="../picture/orig.webp" id="photo"></div>
