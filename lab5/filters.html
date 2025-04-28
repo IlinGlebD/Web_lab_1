@@ -15,17 +15,19 @@
             let contrast = document.getElementById('contrast').value;
             let grayscale = document.getElementById('grayscale').value;
             let hue = document.getElementById('hue').value;
+            let invert = document.getElementById('invert').value;
 
             document.getElementById('blurOutput').innerText = blur + 'px';
             document.getElementById('brightnessOutput').innerText = brightness + '%';
             document.getElementById('contrastOutput').innerText = contrast + '%';
             document.getElementById('grayscaleOutput').innerText = grayscale + '%';
             document.getElementById('hueOutput').innerText = hue + '°';
+            document.getElementById('invertOutput').innerText = invert + '%';
 
             document.getElementById('photo').style.filter = 
             'blur(' + blur + 'px) ' + 'brightness(' + brightness + '%) ' + 
             'contrast(' + contrast + '%) ' + 'grayscale(' + grayscale + '%) ' + 
-            'hue-rotate(' + hue + 'deg) '
+            'hue-rotate(' + hue + 'deg) ' + 'invert(' + invert + '%) '
         }
     </script>
 
@@ -80,6 +82,12 @@
             <span id="hueOutput"></span>
         </div>
 
+        <div class="filter">
+            Invert:
+            <input type="range" min="0" max="100" value="0" id="invert" oninput="updateFilters()">
+            <span id="invertOutput"></span>
+        </div>
+            
         <div><img src="../picture/orig.webp" id="photo"></div>
     </main>
 
