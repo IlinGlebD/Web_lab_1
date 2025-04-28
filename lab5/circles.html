@@ -8,6 +8,23 @@
     <link rel="shortcut icon" href="../favicon/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="../favicon/favicon-16x16.png" type="image/x-icon">
     <link rel="shortcut icon" href="../favicon/favicon-32x32.png" type="image/x-icon">
+    <script>
+        window.onload = function() {
+            const circles = document.querySelectorAll('.circle');
+
+            circles.forEach(circle => {
+                circle.addEventListener('click', () => {
+                    circle.classList.add('hide');
+                });
+            });
+
+            document.getElementById('reset').addEventListener('click', () => {
+                circles.forEach(circle => {
+                    circle.classList.remove('hide');
+                });
+            });
+        }
+    </script>
     <style>
         #field {
             position: relative;
@@ -68,21 +85,5 @@
     <footer>
         &copy; Ильин Глеб, ФБИ-32, 2 курс, 2025
     </footer>
-
-    <script>
-        const circles = document.querySelectorAll('.circle');
-
-        circles.forEach(circle => {
-            circle.addEventListener('click', () => {
-                circle.classList.add('hide');
-            });
-        });
-
-        document.getElementById('reset').addEventListener('click', () => {
-            circles.forEach(circle => {
-                circle.classList.remove('hide');
-            });
-        });
-    </script>
 </body>
 </html>
