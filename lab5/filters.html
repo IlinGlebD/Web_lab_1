@@ -16,6 +16,7 @@
             let grayscale = document.getElementById('grayscale').value;
             let hue = document.getElementById('hue').value;
             let invert = document.getElementById('invert').value;
+            let saturate = document.getElementById('saturate').value;
 
             document.getElementById('blurOutput').innerText = blur + 'px';
             document.getElementById('brightnessOutput').innerText = brightness + '%';
@@ -23,11 +24,13 @@
             document.getElementById('grayscaleOutput').innerText = grayscale + '%';
             document.getElementById('hueOutput').innerText = hue + '°';
             document.getElementById('invertOutput').innerText = invert + '%';
+            document.getElementById('saturateOutput').innerText = saturate + '%';
 
             document.getElementById('photo').style.filter = 
             'blur(' + blur + 'px) ' + 'brightness(' + brightness + '%) ' + 
             'contrast(' + contrast + '%) ' + 'grayscale(' + grayscale + '%) ' + 
-            'hue-rotate(' + hue + 'deg) ' + 'invert(' + invert + '%) '
+            'hue-rotate(' + hue + 'deg) ' + 'invert(' + invert + '%) ' +
+            'saturate(' + saturate + '%) '
         }
     </script>
 
@@ -42,6 +45,7 @@
             font-size: 20px;
             color: maroon;
             margin: 10px;
+            text-align: center;
         }
 
     </style>
@@ -86,6 +90,12 @@
             Invert:
             <input type="range" min="0" max="100" value="0" id="invert" oninput="updateFilters()">
             <span id="invertOutput"></span>
+        </div>
+
+        <div class="filter">
+            Saturate:
+            <input type="range" min="0" max="500" value="100" id="saturate" oninput="updateFilters()">
+            <span id="saturateOutput"></span>
         </div>
             
         <div><img src="../picture/orig.webp" id="photo"></div>
