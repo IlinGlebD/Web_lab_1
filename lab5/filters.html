@@ -17,6 +17,7 @@
             let hue = document.getElementById('hue').value;
             let invert = document.getElementById('invert').value;
             let saturate = document.getElementById('saturate').value;
+            let sepia = document.getElementById('sepia').value;
 
             document.getElementById('blurOutput').innerText = blur + 'px';
             document.getElementById('brightnessOutput').innerText = brightness + '%';
@@ -25,12 +26,13 @@
             document.getElementById('hueOutput').innerText = hue + '°';
             document.getElementById('invertOutput').innerText = invert + '%';
             document.getElementById('saturateOutput').innerText = saturate + '%';
+            document.getElementById('sepiaOutput').innerText = sepia + '%';
 
             document.getElementById('photo').style.filter = 
             'blur(' + blur + 'px) ' + 'brightness(' + brightness + '%) ' + 
             'contrast(' + contrast + '%) ' + 'grayscale(' + grayscale + '%) ' + 
             'hue-rotate(' + hue + 'deg) ' + 'invert(' + invert + '%) ' +
-            'saturate(' + saturate + '%) '
+            'saturate(' + saturate + '%) ' + 'sepia(' + sepia + '%)';
         }
     </script>
 
@@ -96,6 +98,12 @@
             Saturate:
             <input type="range" min="0" max="500" value="100" id="saturate" oninput="updateFilters()">
             <span id="saturateOutput"></span>
+        </div>
+
+        <div class="filter">
+            Sepia:
+            <input type="range" min="0" max="100" value="0" id="sepia" oninput="updateFilters()">
+            <span id="sepiaOutput"></span>
         </div>
             
         <div><img src="../picture/orig.webp" id="photo"></div>
