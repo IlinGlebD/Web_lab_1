@@ -13,14 +13,16 @@
             let blur = document.getElementById('blur').value;
             let brightness = document.getElementById('brightness').value;
             let contrast = document.getElementById('contrast').value;
+            let grayscale = document.getElementById('grayscale').value;
 
             document.getElementById('blurOutput').innerText = blur + 'px';
             document.getElementById('brightnessOutput').innerText = brightness + '%';
             document.getElementById('contrastOutput').innerText = contrast + '%';
+            document.getElementById('grayscaleOutput').innerText = grayscale + '%';
 
             document.getElementById('photo').style.filter = 
             'blur(' + blur + 'px) ' + 'brightness(' + brightness + '%) ' + 
-            'contrast(' + contrast + '%) '
+            'contrast(' + contrast + '%) ' + 'grayscale(' + grayscale + '%) ' 
         }
     </script>
 
@@ -61,6 +63,12 @@
             Contrast:
             <input type="range" min="0" max="500" value="100" id="contrast" oninput="updateFilters()">
             <span id="contrastOutput"></span>
+        </div>
+
+        <div class="filter">
+            Grayscale:
+            <input type="range" min="0" max="100" value="0" id="grayscale" oninput="updateFilters()">
+            <span id="grayscaleOutput"></span>
         </div>
             
         <div><img src="../picture/orig.webp" id="photo"></div>
