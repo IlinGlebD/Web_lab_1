@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="../favicon/favicon-32x32.png" type="image/x-icon">
     <script>
         window.onload = function() {
-            const circles = document.querySelectorAll('.circle');
+            const circles = document.querySelectorAll('.circle'); // NodeList — похож на массив
 
             circles.forEach(circle => {
                 circle.addEventListener('click', () => {
@@ -48,7 +48,7 @@
         }
         .hide {
             opacity: 0;
-            transform: scale(0);
+            transition: 0,5;
         }
         #reset {
             margin-top: 20px;
