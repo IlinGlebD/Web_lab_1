@@ -14,7 +14,7 @@
             height: 500px;
             margin: 20px auto;
             display: block;
-            transition: filter 0.3s;
+            transition: 1s;
             cursor: pointer;
         }
         .info {
@@ -31,13 +31,17 @@
             let filterName = document.getElementById('filterName');
             let filterValue = document.getElementById('filterValue');
 
+            // Вычисление положения курсора относительно изображения
             let rect = img.getBoundingClientRect();
             let x = event.clientX - rect.left;
             let width = rect.width;
             let percent = x / width;
+
+            // Ограничение значения в пределах 0–1 (проценты)
             if (percent < 0) percent = 0;
             if (percent > 1) percent = 1;
 
+            // Перевод процента в значение фильтр
             let value = Math.round(percent * 20); // максимум blur 20px
 
             let filter = '';
@@ -45,20 +49,20 @@
 
             if (event.ctrlKey) {
                 // При зажатом Ctrl: grayscale
-                filter = `grayscale(${Math.round(percent * 100)}%)`;
-                description = `grayscale(${Math.round(percent * 100)}%)`;
+                filter = 'grayscale(' + Math.round(percent * 100) + '%)';
+                description = 'grayscale(' + Math.round(percent * 100) + '%)';
             } else if (event.altKey) {
                 // При зажатом Alt: hue-rotate
-                filter = `hue-rotate(${Math.round(percent * 360)}deg)`;
-                description = `hue-rotate(${Math.round(percent * 360)}deg)`;
+                filter = 'hue-rotate(' + Math.round(percent * 360) + 'deg)';
+                description = 'hue-rotate(' + Math.round(percent * 360) + 'deg)';
             } else if (event.shiftKey) {
                 // При зажатом Shift: invert
-                filter = `invert(${Math.round(percent * 100)}%)`;
-                description = `invert(${Math.round(percent * 100)}%)`;
+                filter = 'invert(' + Math.round(percent * 100) + '%)';
+                description = 'invert(' + Math.round(percent * 100) + '%)';
             } else {
                 // Без клавиш: blur
-                filter = `blur(${value}px)`;
-                description = `blur(${value}px)`;
+                filter = 'blur(' + value + 'px)';
+                description = 'blur(' + value + 'px)';
             }
 
             img.style.filter = filter;
