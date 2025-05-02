@@ -15,6 +15,12 @@
             let today = new Date();
             out.innerHTML = today.toLocaleString('ru-Ru');
         }
+
+        function ChangeColors() {
+            const header = document.getElementsByTagName('header')[0];
+            const rgb = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+            header.style.color = rgb;
+        }
     </script>
 </head>
 <body onload="showDate()">
@@ -24,6 +30,10 @@
 
     <main>
         <div id="current-date"></div>
+        <div>
+            <button onclick="startChangeColors()">Старт</button>
+            <button onclick="stopChangeColors()">Стоп</button>
+        </div>
     </main>
 
     <footer>
