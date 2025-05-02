@@ -4,21 +4,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ильин Глеб Дмитриевич. Лабораторная работа 6</title>
+    <title>Ильин Глеб Дмитриевич. Таблица умножения</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="shortcut icon" href="../favicon/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="../favicon/favicon-16x16.png" type="image/x-icon">
     <link rel="shortcut icon" href="../favicon/favicon-32x32.png" type="image/x-icon">
+    <script>
+        function showMultipleTable() {
+            let tbl = document.getElementById('mtable');
+            tbl.innerHTML = '<h1>Таблица умножения</h1>';
+            for(i = 1; i <= 10; i++) {
+                let s = `<div>${i} * 7 = ${i*7}</div>`;
+                tbl.innerHTML += s;
+            }
+        }
+
+        showMultipleTable();
+    </script>
+
+    <style>
+        h1 {
+            text-align: center;
+        }
+        div {
+            color: maroon;
+            font-size: 20px;
+            margin: 10px;
+        }
+    </style>
 </head>
-<body>
+<body onload="showMultipleTable()">
     <header>
         НГТУ, ФБ, Лабораторная работа 6
     </header>
 
     <main>
-        <ol>
-            <li><a href="mtable.html">Таблица умножения</a></li>
-        </ol>
+        <div id="mtable"></div>
     </main>
 
     <footer>
