@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ильин Глеб Дмитриевич. Таблица умножения</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="shortcut icon" href="../favicon/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon/favicon-16x16.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon/favicon-32x32.png" type="image/x-icon">
+    <script>
+        function showDiagram() {
+            let data = [36, 86, 55, 28, 92, 60, 41, 17, 9, 43];
+            let bars =document.getElementsByClassName('bar');
+            let colors = ['red', 'blue', 'purple', 'black', 'green', 'yellow', 'marron', 'aqua', 'navy', 'lightgreen']
+            const diagWidth = document.getElementById('diag').clientWidth;
+            const maxData = Math.max(...data);
+            const k = diagWidth / maxData * 0.9;
+            for(let i = 0; i < data.length; i++) {
+                bars[i].style.width = k*data[i] + 'px';
+                bars[i].style.backgroundColor = colors[i];
+            }
+        }
+        
+    </script>
+    <style>
+        #diag {
+            background-color: white;
+            position: absolute;
+            width: 800px;
+            height: 570px;
+            margin-top: 5px;
+        }
+        .bar {
+            background-color: aqua;
+            border: 1px solid;
+            width: 200px;
+            height: 50px;
+            margin-top: 5px;     
+        }
+    </style>
+</head>
+<body onload="showDiagram()">
+    <header>
+        НГТУ, ФБ, Лабораторная работа 6
+    </header>
+
+    <main>
+        <div id="diag">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; Ильин Глеб, ФБИ-32, 2 курс, 2025
+    </footer>
+</body>
+</html>
