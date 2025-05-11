@@ -4,42 +4,64 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ильин Глеб Дмитриевич. Таблица умножения</title>
+    <title>Ильин Глеб Дмитриевич. Гистограмма</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="shortcut icon" href="../favicon/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="../favicon/favicon-16x16.png" type="image/x-icon">
     <link rel="shortcut icon" href="../favicon/favicon-32x32.png" type="image/x-icon">
-    <script>
-        function showDiagram() {
-            let data = [36, 86, 55, 28, 92, 60, 41, 17, 9, 43];
-            let bars =document.getElementsByClassName('bar');
-            let colors = ['red', 'blue', 'purple', 'black', 'green', 'yellow', 'marron', 'aqua', 'navy', 'lightgreen']
-            const diagWidth = document.getElementById('diag').clientWidth;
-            const maxData = Math.max(...data);
-            const k = diagWidth / maxData * 0.9;
-            for(let i = 0; i < data.length; i++) {
-                bars[i].style.width = k*data[i] + 'px';
-                bars[i].style.backgroundColor = colors[i];
-            }
-        }
-        
-    </script>
+
     <style>
         #diag {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
             background-color: white;
-            position: absolute;
             width: 800px;
-            height: 570px;
-            margin-top: 5px;
+            height: 400px;
+            margin: 20px auto;
+            border: 2px solid #ccc;
+            padding: 10px;
         }
+
         .bar {
-            background-color: aqua;
-            border: 1px solid;
-            width: 200px;
-            height: 50px;
-            margin-top: 5px;     
+            width: 40px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            position: relative;
+            color: maroon;
+            font-weight: bold;
+            font-size: 14px;
+            border: 1px solid #000;
+            box-sizing: border-box;
+        }
+
+        .bar span {
+            position: absolute;
+            top: -20px;
         }
     </style>
+
+    <script>
+        function showDiagram() {
+            const data = [36, 86, 55, 28, 92, 60, 41, 17, 9, 43];
+            const colors = ['red', 'blue', 'purple', 'black', 'green', 'yellow', 'maroon', 'aqua', 'navy', 'lightgreen'];
+            const diag = document.getElementById('diag');
+            const maxVal = Math.max(...data);
+            const scale = 300 / maxVal; // масштабирование по высоте
+
+            diag.innerHTML = ''; // очищаем контейнер перед построением
+
+            for (let i = 0; i < data.length; i++) {
+                const bar = document.createElement('div');
+                bar.className = 'bar';
+                bar.style.height = data[i] * scale + 'px';
+                bar.style.backgroundColor = colors[i % colors.length];
+                bar.innerHTML = `<span>${data[i]}</span>`;
+                diag.appendChild(bar);
+            }
+        }
+    </script>
 </head>
 <body onload="showDiagram()">
     <header>
@@ -47,18 +69,7 @@
     </header>
 
     <main>
-        <div id="diag">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
+        <div id="diag"></div>
     </main>
 
     <footer>
