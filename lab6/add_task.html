@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Ильин Глеб Дмитриевич. Температура за месяц</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="shortcut icon" href="../favicon/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon/favicon-16x16.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon/favicon-32x32.png" type="image/x-icon">
+
+    <style>
+        #diag {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            background-color: white;
+            width: 1000px;
+            height: 400px;
+            margin: 20px auto;
+            border: 5px solid #ccc;
+            padding: 10px;
+        }
+
+        .bar {
+            width: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            position: relative;
+        }
+
+        .min, .max {
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            box-sizing: border-box;
+        }
+
+        .min {
+            background: blue;
+            color: white;
+        }
+
+        .max {
+            background: lightblue;
+            color: black;
+        }
+
+        .highlight .min,
+        .highlight .max {
+            background: coral !important;
+        }
+    </style>
+
+    <script>
+        let temps = [];
+        let highlighted = null;
+
+        function showDiagram() {
+            const diag = document.getElementById('diag');
+            const chartHeight = 500;
+            diag.innerHTML = '';
+
+            for (let i = 0; i < 30; i++) {
+                const min = Math.floor(Math.random() * 11) + 5;
+                const max = min + Math.floor(Math.random() * 11) + 5;
+                temps.push({ min, max });
+
+                const minHeight = (min / 50) * chartHeight;
+                const maxHeight = ((max - min) / 50) * chartHeight;
+
+                const bar = document.createElement('div');
+                bar.className = 'bar';
+                bar.id = `day-${i}`;
+
+                const maxDiv = document.createElement('div');
+                maxDiv.className = 'max';
+                maxDiv.style.height = `${maxHeight}px`;
+                maxDiv.textContent = `${max}°`;
+
+                const minDiv = document.createElement('div');
+                minDiv.className = 'min';
+                minDiv.style.height = `${minHeight}px`;
+                minDiv.textContent = `${min}°`;
+
+                bar.appendChild(maxDiv);
+                bar.appendChild(minDiv);
+                diag.appendChild(bar);
+            }
+        }
+
+        function highlightDay() {
+            const num = parseInt(document.getElementById('dayInput').value);
+            if (isNaN(num) || num < 1 || num > 30) return;
+
+            if (highlighted) {
+                highlighted.classList.remove('highlight');
+            }
+
+            const day = document.getElementById(`day-${num - 1}`);
+            day.classList.add('highlight');
+            highlighted = day;
+
+            const { min, max } = temps[num - 1];
+            document.getElementById('minTemp').textContent = min;
+            document.getElementById('maxTemp').textContent = max;
+        }
+    </script>
+</head>
+<body onload="showDiagram()">
+
+    <header>
+        НГТУ, ФБ, Лабораторная работа 6
+    </header>
+
+    <main>
+        <div id="diag"></div>
+
+        <div style="text-align:center; margin-top:20px; color: maroon; font-family: Arial, Helvetica, sans-serif; font-weight: bold;">
+            <label>Номер дня:
+                <input type="number" id="dayInput" min="1" max="30">
+            </label>
+            <button onclick="highlightDay()">Найти</button>
+        </div>
+
+        <div style="text-align:center; margin-top:10px; color: maroon; font-family: Arial, Helvetica, sans-serif; font-weight: bold;">
+            <p>Минимальная температура: <span id="minTemp">-</span>°C</p>
+            <p>Максимальная температура: <span id="maxTemp">-</span>°C</p>
+        </div>
+    </main>
+
+    <footer>
+        &copy; Ильин Глеб, ФБИ-32, 2 курс, 2025
+    </footer>
+</body>
+</html>
