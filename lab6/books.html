@@ -2,26 +2,77 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ильин Глеб Дмитриевич. Список книг</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="shortcut icon" href="../favicon/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="../favicon/favicon-16x16.png" type="image/x-icon">
     <link rel="shortcut icon" href="../favicon/favicon-32x32.png" type="image/x-icon">
+    <style>
+        h1 {
+            text-align: center;
+        }
+        
+        .book {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px auto;
+            width: 600px;
+            background-color: #f9f9f9;
+            transition: 0.3s;
+        }
+
+        .book.bestseller {
+            border: 2px solid gold;
+            background-color: #fffbe6;
+        }
+
+        .book.unavailable {
+            color: #888;
+            background-color: #eee;
+        }
+
+        .book-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .book-author {
+            font-style: italic;
+        }
+
+        .price {
+            color: darkgreen;
+            font-weight: bold;
+        }
+
+        .note {
+            font-size: 12px;
+            color: #555;
+        }
+    </style>
+
     <script src="books.js"></script>
     <script>
         function showBooks() {
             const bookList = document.getElementById('bookList');
-            for(let i = 0; i < books.length; i++) {
-                bookList.innerHTML += `
-                <div>
-                    <b>${ books[i].author }.<b>
-                    <i>${ books[i].name }</i>
-                    &mdash; ${ books[i].publicationYear }
-                </div>
-                `
-            }
+
+            books.forEach(book => {
+                const div = document.createElement('div');
+                div.className = 'book';
+                if (book.bestseller) div.classList.add('bestseller');
+                if (!book.available) div.classList.add('unavailable');
+
+                div.innerHTML = `
+                    <div class="book-title">${book.name}</div>
+                    <div class="book-author">${book.author}</div>
+                    <div>Год издания: ${book.publicationYear}</div>
+                    <div class="price">Цена: ${book.price} ₽</div>
+                    ${book.bestseller ? '<div class="note">Бестселлер</div>' : ''}
+                    ${!book.available ? '<div class="note">Нет в наличии</div>' : ''}
+                `;
+                bookList.appendChild(div);
+            });
         }
     </script>
 </head>
@@ -32,9 +83,7 @@
 
     <main>
         <h1>Список книг</h1>
-        <div id="bookList">
-
-        </div>
+        <div id="bookList"></div>
     </main>
 
     <footer>
