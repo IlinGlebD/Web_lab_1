@@ -9,29 +9,56 @@
     <link rel="shortcut icon" href="../favicon/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="../favicon/favicon-16x16.png" type="image/x-icon">
     <link rel="shortcut icon" href="../favicon/favicon-32x32.png" type="image/x-icon">
-    <script>
-        function showMultipleTable() {
-            let tbl = document.getElementById('mtable');
-            tbl.innerHTML = '<h1>Таблица умножения</h1>';
-            for(i = 1; i <= 10; i++) {
-                let s = `<div>${i} * 7 = ${i*7}</div>`;
-                tbl.innerHTML += s;
-            }
-        }
-
-        showMultipleTable();
-    </script>
-
+    
     <style>
         h1 {
             text-align: center;
+            color: maroon;
         }
-        div {
+        .output div {
             color: maroon;
             font-size: 20px;
+            margin: 5px 20px;
+        }
+        hr {
             margin: 10px;
+            border-width: 3px;
+            border-color: maroon;
+        }
+        form {
+            margin: 5px 20px;
+            font-size: 20px;
+            color: maroon;
+        }
+        input {
+            margin: 5px;
+            padding: 5px;
+            width: 80px;
+        }
+        button {
+            padding: 5px 10px;
         }
     </style>
+
+    <script>
+        function showMultipleTable() {
+            const multiplyBy = parseInt(document.getElementById('multiplyBy').value);
+            let startFrom = parseInt(document.getElementById('startFrom').value);
+            let endAt = parseInt(document.getElementById('endAt').value);
+
+            // Обмен значений, если начальное больше конечного
+            if (startFrom > endAt) {
+                [startFrom, endAt] = [endAt, startFrom];
+            }
+
+            const tbl = document.getElementById('mtable');
+            tbl.innerHTML = '<h1>Таблица умножения</h1>';
+            
+            for (let i = startFrom; i <= endAt; i++) {
+                tbl.innerHTML += `<div>${i} * ${multiplyBy} = ${i * multiplyBy}</div>`;
+            }
+        }
+    </script>
 </head>
 <body onload="showMultipleTable()">
     <header>
@@ -39,7 +66,19 @@
     </header>
 
     <main>
-        <div id="mtable"></div>
+        <div class="output" id="mtable"></div><hr>
+        <form onsubmit="showMultipleTable(); return false;">
+            <label>Умножить на:
+                <input type="number" id="multiplyBy" value="7">
+            </label><br>
+            <label>Начать с:
+                <input type="number" id="startFrom" value="1">
+            </label><br>
+            <label>Закончить на:
+                <input type="number" id="endAt" value="10">
+            </label><br>
+            <button type="submit">Таблица</button>
+        </form>
     </main>
 
     <footer>
