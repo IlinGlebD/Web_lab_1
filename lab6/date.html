@@ -13,8 +13,14 @@
         function showDate() {
             let out = document.getElementById('current-date');
             let today = new Date();
-            out.innerHTML = today.toLocaleString('ru-Ru');
-        }
+            out.innerHTML = `
+            <div>Россия (ru-RU): ${today.toLocaleString('ru-RU')}</div>
+            <div>США (en-US): ${today.toLocaleString('en-US')}</div>
+            <div>Германия (de-DE): ${today.toLocaleString('de-DE')}</div>
+            <div>Китай (zh-CN): ${today.toLocaleString('zh-CN')}</div>
+            <div>Япония (ja-JP): ${today.toLocaleString('ja-JP')}</div>
+        `;
+    }
 
         function ChangeColors() {
             const header = document.getElementsByTagName('header')[0];
@@ -22,6 +28,14 @@
             header.style.color = rgb;
         }
     </script>
+    <style>
+        #current-date {
+            color: maroon;
+            font-size: 20px;
+            margin: 5px 20px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
 </head>
 <body onload="showDate()">
     <header>
