@@ -9,6 +9,91 @@
     <link rel="shortcut icon" href="../favicon/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="../favicon/favicon-16x16.png" type="image/x-icon">
     <link rel="shortcut icon" href="../favicon/favicon-32x32.png" type="image/x-icon">
+
+    <script src="share-data.js"></script>
+    <script>
+        function showShare() {
+            let table = document.getElementById('share-table');
+            let detail = document.getElementById('detail');
+            let button = document.querySelector('button');
+            button.style.display = 'none';
+    
+            for (let i = 0; i < share.length; i++) {
+                let tr = document.createElement('tr');
+    
+                // Дата
+                let tdDate = document.createElement('td');
+                tdDate.innerText = date[i];
+                tr.appendChild(tdDate);
+    
+                // Цена
+                let tdPrice = document.createElement('td');
+                tdPrice.innerText = share[i].toFixed(4);
+                tr.appendChild(tdPrice);
+    
+                // Разница
+                let tdDiff = document.createElement('td');
+                if (i === 0) {
+                    tdDiff.innerText = '–';
+                } else {
+                    let diff = (share[i] - share[i - 1]).toFixed(4);
+                    tdDiff.innerText = diff;
+    
+                    if (diff > 0) {
+                        tdDiff.style.color = 'green';
+                    } else if (diff < 0) {
+                        tdDiff.style.color = 'red';
+                    } else {
+                        tdDiff.style.color = 'black';
+                    }
+                }
+    
+                tr.appendChild(tdDiff);
+                table.appendChild(tr);
+            }
+    
+            // Подсчёт статистики
+            let sum = share.reduce((a, b) => a + b, 0);
+            let avg = (sum / share.length).toFixed(4);
+            let max = Math.max(...share).toFixed(4);
+            let min = Math.min(...share).toFixed(4);
+    
+            detail.innerHTML = `
+                <p><strong>Средняя цена акций:</strong> ${avg}</p>
+                <p><strong>Максимальная цена:</strong> ${max}</p>
+                <p><strong>Минимальная цена:</strong> ${min}</p>
+            `;
+        }
+    </script>
+
+    <style>
+        th {
+            color: maroon;
+            font-size: 20px;
+        }
+
+        #share-table {
+            border-collapse: collapse;
+            margin: 10px;
+            width: 400px;
+        }
+
+        #share-table th, #share-table td {
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #444;
+        }
+
+        #share-table th {
+            background-color: #f2f2f2;
+        }
+
+        #detail {
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -16,7 +101,19 @@
     </header>
 
     <main>
-        
+        <button onclick="showShare()" style="height: 50px; width: 200px; background-color: aqua; margin: 10px;">
+            Курс акций ОГК-2
+        </button>
+
+        <table id="share-table">
+            <tr>
+                <th>Дата</th>
+                <th>Цена, руб</th>
+                <th>Изменения</th>
+            </tr>
+        </table>
+
+        <div id="detail"></div>
     </main>
 
     <footer>
