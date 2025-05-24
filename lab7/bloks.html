@@ -15,7 +15,8 @@
             let newBlock = document.createElement('div');
             newBlock.style.backgroundColor = 'green';
             newBlock.style.height = '40px';
-
+            newBlock.style.margin = '10px';
+            newBlock.style.border =  '5px solid yellow';
             document.querySelector('main').appendChild(newBlock);
         }
     </script>
@@ -26,7 +27,9 @@
     </header>
 
     <main>
-        <button onclick="addNewBlock()">Добавить блок</button>
+        <button onclick="addNewBlock()" style="margin: 10px; height: 50px; width: 200px; background-color: aqua;">
+            Добавить блок
+        </button>
     </main>
 
     <footer>
