@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Ильин Глеб Дмитриевич. Погода в Новосибирске</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="shortcut icon" href="../favicon/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon/favicon-16x16.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon/favicon-32x32.png" type="image/x-icon">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        async function loadWeather() {
+            const url = 'https://api.open-meteo.com/v1/forecast?latitude=55.0415&longitude=82.9346&hourly=temperature_2m,apparent_temperature&current_weather=true&past_days=1&forecast_days=1&timezone=Asia%2FBangkok';
+
+            const response = await fetch(url);
+            const data = await response.json();
+
+            const time = data.hourly.time;
+            const temp = data.hourly.temperature_2m;
+            const feels = data.hourly.apparent_temperature;
+
+            const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+            const todayData = [];
+
+            for (let i = 0; i < time.length; i++) {
+                if (time[i].startsWith(today)) {
+                    todayData.push({
+                        time: time[i].slice(11, 16), // "HH:MM"
+                        temp: temp[i],
+                        feels: feels[i]
+                    });
+                }
+            }
+
+            const labels = todayData.map(d => d.time);
+            const tempData = todayData.map(d => d.temp);
+            const feelsData = todayData.map(d => d.feels);
+
+            document.getElementById("current").innerHTML = `
+                Температура: <strong>${data.current_weather.temperature}°C</strong><br>
+                Ощущается как: <strong>${data.current_weather.apparent_temperature ?? 'недоступно'} °C</strong>
+            `;
+            
+
+            const ctx = document.getElementById('weatherChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Температура (°C)',
+                            data: tempData,
+                            backgroundColor: 'rgba(54, 162, 235, 0.6)'
+                        },
+                        {
+                            label: 'Ощущается как (°C)',
+                            data: feelsData,
+                            type: 'line',
+                            borderColor: 'orange',
+                            borderWidth: 2,
+                            fill: false,
+                            tension: 0.3
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Почасовой прогноз температуры на сегодня'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Время'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Температура (°C)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: aliceblue;
+        }
+
+        #weather {
+            margin-top: 20px;
+        }
+
+        #current {
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        canvas {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 7
+    </header>
+
+    <main>
+       <h1>Погода в Новосибирске (Open-Meteo)</h1>
+
+        <button onclick="loadWeather()">Показать прогноз</button>
+
+        <div id="weather">
+            <div id="current"></div>
+            <canvas id="weatherChart"></canvas>
+        </div> 
+    </main>
+
+    <footer>
+        &copy; Ильин Глеб, ФБИ-32, 2 курс, 2025
+    </footer>
+</body>
+</html>
