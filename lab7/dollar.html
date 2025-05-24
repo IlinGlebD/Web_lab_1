@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ильин Глеб Дмитриевич. Добавление блоков</title>
+    <title>Ильин Глеб Дмитриевич. Курс доллара</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="shortcut icon" href="../favicon/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="../favicon/favicon-16x16.png" type="image/x-icon">
@@ -15,6 +15,10 @@
         function showExchange() {
             let table = document.getElementById('dollar-table');
             let detail = document.getElementById('detail');
+            let button = document.getElementById('buttonOFF');
+
+            button.style.display = 'none';
+
             for(let i = 0; i < exchange.length; i++) {
                 let tr = document.createElement('tr');
                 let td = document.createElement('td');
@@ -29,9 +33,34 @@
             }
             let average = sum / exchange.length;
             average = average.toFixed(2);
-            detail.innerHTML = average
+            detail.innerHTML = `Среднее значение: <u>${average}</u>`
         }
     </script>
+
+    <style>
+        #dollar-table {
+            border-collapse: collapse;
+            margin: 10px;
+            width: 200px;
+        }
+
+        #dollar-table th, #dollar-table td {
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #444;
+        }
+
+        #dollar-table th {
+            background-color: #ddd;
+        }
+
+        #detail {
+            margin: 15px;
+            font-size: 20px;
+            color: darkgreen;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -39,8 +68,12 @@
     </header>
 
     <main>
-        <button onclick="showExchange()">Курс доллара</button>
+        <button id="buttonOFF" onclick="showExchange()" style="height: 50px; width: 200px; background-color: aqua; margin: 10px;">
+            Курс доллара
+        </button>
+
         <table border="1" id="dollar-table"></table>
+
         <div id="detail"></div>
     </main>
 
