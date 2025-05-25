@@ -23,6 +23,11 @@
             background-color: bisque;
             font-size: 20px;
         }
+
+        div {
+            font-size: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
     </style>
 </head>
 <body>
@@ -36,6 +41,12 @@
             <p>Счётчик: {{ counter }}</p>
             <button @click="incCounter" v-if="counter < 10">++</button>
             <button @click="decCounter" v-if="counter > 0">--</button>
+            <hr>
+
+            <h2>Пользователи:</h2>
+            <div>Имя: {{ user.name }}</div>
+            <div>Возраст: {{ user.age }}</div>
+            <div>Телефон: {{ user.tel }}</div>
         </div>
     </main>
 
@@ -50,6 +61,11 @@
                     message: 'Hello!',
                     messageRus: 'Привет!',
                     counter: 1,
+                    user: {
+                        name: 'Вася',
+                        age: '18',
+                        tel: '222-33-44',
+                    }
                 }
             },
             methods: {
