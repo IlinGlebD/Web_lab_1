@@ -11,7 +11,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-</head>
+
+    <style>
+        body {
+            padding: 20px;
+        }
+    </style>
 <body>
     <header>
         НГТУ, ФБ, Лабораторная работа 8
@@ -19,74 +24,100 @@
 
     <main>
         <div id="app">
-            <h1 :title="messageRus">{{ message }}</h1>
-            <p>Счётчик: {{ counter }}</p>
-            <button @click="incCounter" v-if="counter < 10">++</button>
-            <button @click="decCounter" v-if="counter > 0">--</button>
+            <h1 :title="messageRus" class="mb-4">{{ message }}</h1>
+
+            <!-- Счётчик -->
+            <h2>Счётчик</h2>
+            <p>Значение: <strong>{{ counter }}</strong></p>
+            <div class="btn-group mb-4">
+                <button @click="incCounter" class="btn btn-success" v-if="counter < 10">
+                    <i class="bi bi-plus-circle"></i> Увеличить
+                </button>
+                <button @click="decCounter" class="btn btn-danger" v-if="counter > 0">
+                    <i class="bi bi-dash-circle"></i> Уменьшить
+                </button>
+            </div>
             <hr>
 
-            <h2>Пользователи:</h2>
-            <div>Имя: {{ user.name }}</div>
-            <div>Возраст: {{ user.age }}</div>
-            <div>Телефон: {{ user.tel }}</div>
+            <!-- Пользователь -->
+            <h2>Пользователь</h2>
+            <ul class="list-group mb-4">
+                <li class="list-group-item"><strong>Имя:</strong> {{ user.name }}</li>
+                <li class="list-group-item"><strong>Возраст:</strong> {{ user.age }}</li>
+                <li class="list-group-item"><strong>Телефон:</strong> {{ user.tel }}</li>
+            </ul>
             <hr>
 
+            <!-- Цветы (список) -->
             <h2>Цветы</h2>
-            <ul class="list-group">
-                <li v-for="(flowers, id) in flowers" class="list-group-item">
-                    {{ flowers }} <button @click="edit(id, flower)">?</button>
+            <ul class="list-group mb-4">
+                <li v-for="(flower, id) in flowers" class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ flower }}
+                    <button @click="edit(id, flower)" class="btn btn-outline-secondary btn-sm">
+                        <i class="bi bi-pencil-square"></i> Редактировать
+                    </button>
                 </li>
             </ul>
             <hr>
 
-            <div class="card" style="width: 18rem;">
+            <!-- Цветы в карточке -->
+            <div class="card mb-4" style="width: 20rem;">
                 <div class="card-body">
-                    <h2 class="card-title">Цветы</h2>
-                    <ul class="list-gruop">
-                        <li v-for="(flowers, id) in flowers" class="list-group-item">
-                            {{ flowers }} <button @click="edit(id, flower)">?</button>
+                    <h5 class="card-title">Список цветов</h5>
+                    <ul class="list-group">
+                        <li v-for="(flower, id) in flowers" class="list-group-item d-flex justify-content-between align-items-center">
+                            {{ flower }}
+                            <button @click="edit(id, flower)" class="btn btn-outline-primary btn-sm">
+                                <i class="bi bi-pencil"></i>
+                            </button>
                         </li>
                     </ul>
                 </div>
             </div>
             <hr>
 
-            <h2>Цветы</h2>
-            <table class="table table-primary">
-                <thead>
+            <!-- Цветы в таблице -->
+            <h2>Цветы (таблица)</h2>
+            <table class="table table-bordered table-striped table-hover mb-4">
+                <thead class="table-dark">
                     <tr>
                         <th>Название</th>
-                        <th>Редактировать</th>
+                        <th>Действие</th>
                     </tr>
                 </thead>
                 <tr v-for="(flower, id) in flowers">
                     <td>
-                        <span v-if="flower === null">загружается...</span>
+                        <span v-if="flower === null">Загрузка...</span>
                         <span v-else>{{ flower }}</span>
                     </td>
                     <td>
-                        <button @click="edit(id, flower)" class="btn btn-primary" v-if="flower !== null">
+                        <button @click="edit(id, flower)" class="btn btn-outline-primary btn-sm" v-if="flower !== null">
                             <i class="bi bi-pencil"></i>
                         </button>
-                        <div class="spinner-border text-danger" role="status" v-if="flower === null"></div>
+                        <div class="spinner-border text-danger" role="status" v-if="flower === null" style="width: 1.5rem; height: 1.5rem;">
+                            <span class="visually-hidden">Загрузка...</span>
+                        </div>
                     </td>
                 </tr>
             </table>
             <hr>
 
+            <!-- Калькулятор -->
             <h2>Калькулятор</h2>
-            <div class="row g-5">
+            <div class="row align-items-center g-2 mb-4">
                 <div class="col-auto">
-                    <input type="number" v-model="a" class="form-control">
+                    <input type="number" v-model="a" class="form-control" placeholder="Число A">
                 </div>
                 <div class="col-auto">
-                    +
+                    <span class="fs-4">+</span>
                 </div>
                 <div class="col-auto">
-                    <input type="number" v-model="b" class="form-control">
+                    <input type="number" v-model="b" class="form-control" placeholder="Число B">
                 </div>
                 <div class="col-auto">
-                    <button @click="sum" class="btn btn-primary">=</button>
+                    <button @click="sum" class="btn btn-success">
+                        <i class="bi bi-calculator"></i> Посчитать
+                    </button>
                 </div>
                 <div class="col-auto">
                     <span class="badge text-bg-primary fs-5">{{ result }}</span>
@@ -96,7 +127,7 @@
     </main>
 
     <footer>
-        copy; Ильин Глеб, ФБИ-32, 2 курс, 2025
+        &copy; Ильин Глеб, ФБИ-32, 2 курс, 2025
     </footer>
 
     <script>
