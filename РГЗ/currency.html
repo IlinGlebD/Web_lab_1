@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Курс валюты</title>
+    <link rel="stylesheet" href="../css/nefaz.css">
+    <link rel="icon" href="../favicon/i.webp">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js.js"></script>
+</head>
+<body id="top">
+    <header>
+        <img src="../picture/logo черный с металлом.png" alt="НЕФАЗ">
+    </header>
+
+    <div class="wrapper">
+        <nav class="sidebar">
+            <ul>
+                <li><a href="info.html" class="menu-link">О компании</a></li>
+                <li><a href="news.html" class="menu-link">Новости</a></li>
+                <li><a href="currency.html" class="menu-link active">Курс валют</a></li>
+                <li><a href="contacts.html" class="menu-link">Контакты</a></li>
+                <li><a href="video.html" class="menu-link">Видео</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <h1>Курс валют (Фунты стерлингов)</h1>
+
+            <!-- Калькулятор RUB ⇌ GBP -->
+            <section>
+                <h2>Калькулятор RUB ⇌ GBP</h2>
+                <label for="amount">Сумма:</label>
+                <input type="number" id="amount" placeholder="Введите сумму">
+                <select id="direction">
+                <option value="rub-to-gbp">Рубли → Фунты</option>
+                <option value="gbp-to-rub">Фунты → Рубли</option>
+                </select>
+                <button id="convertBtn">Конвертировать</button>
+                <p id="result">Результат: —</p>
+            </section>
+            <hr>
+
+            <!-- График изменения курса за последний месяц -->
+            <section>
+                <h2>Изменение курса GBP за последний месяц</h2>
+                <p id="rate-info">Загрузка...</p>
+                <canvas id="gbpChart" width="800" height="400"></canvas>
+            </section>
+
+            <div style="display: flex; gap: 20px; justify-content: center; margin-top: 50px;">
+                <a href="https://nefaz.ru/owners/service_station/">
+                    <img src="../picture/СТО.png" alt="СТО" class="darken-on-hover">
+                </a>
+                <a href="https://nefaz.ru/products/agricultural_machinery/65207-01-s5/">
+                    <img src="../picture/Камаз.jpg" alt="КАМАЗ" class="darken-on-hover">
+                </a>
+                <a href="https://nefaz.ru/owners/spare_parts/">
+                    <img src="../picture/ОЗН.png" alt="Запчасти" class="darken-on-hover">
+                </a>
+            </div>
+
+            <a href="#top" class="scroll-to-top" id="scrollTopBtn">⮝ Наверх</a>
+        </main>
+    </div>
+
+    <footer>
+        &copy; Публичное акционерное общество «НЕФАЗ»
+
+        <div class="div-footer">
+            <a href="https://www.e-disclosure.ru/portal/company.aspx?id=227">
+                Раскрытие информации на сайте ООО "Интерфакс - Центр раскрытия 
+                корпоративной информации"
+            </a>
+        </div>
+         
+        <div class="div-footer">
+            <a href="https://nefaz.ru/about/upload/snoon.pdf">
+                Уведомление о присоединении к Стандарту налоговой открытости 
+                ответственных налогоплательщиков Республики Башкортостан
+            </a>
+        </div>
+    </footer>
+
+  <!-- Скрипт инициализации -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let currentRate = 0;
+            const resultEl = document.getElementById('result');
+            const rateInfoEl = document.getElementById('rate-info');
+            const convertBtn = document.getElementById('convertBtn');
+
+            // Загрузка текущего курса
+            async function loadCurrentRate() {
+                try {
+                    const res = await fetch('https://www.cbr-xml-daily.ru/daily_json.js');
+                    const data = await res.json();
+                    currentRate = data.Valute.GBP.Value;
+                    rateInfoEl.textContent = `Текущий курс: 1 GBP = ${currentRate.toFixed(2)} RUB`;
+                    } catch {
+                        rateInfoEl.textContent = 'Не удалось загрузить текущий курс.';
+                    }
+            }
+
+            // Функция конвертации
+            function convert() {
+                const amount = parseFloat(document.getElementById('amount').value);
+                if (isNaN(amount)) return alert('Введите корректное число');
+                const direction = document.getElementById('direction').value;
+                const res = direction === 'rub-to-gbp'
+                ? (amount / currentRate).toFixed(2) + ' GBP'
+                : (amount * currentRate).toFixed(2) + ' RUB';
+                resultEl.textContent = `Результат: ${res}`;
+            }
+
+            // Построение графика за месяц
+            async function drawChart() {
+                const end = new Date();
+                const start = new Date(end);
+                start.setMonth(start.getMonth() - 1);
+                const fmt = d => `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;
+                const baseUrl = `https://www.cbr.ru/scripts/XML_dynamic.asp?date_req1=${fmt(start)}&date_req2=${fmt(end)}&VAL_NM_RQ=R01035`;
+                const proxy = 'https://api.allorigins.win/raw?url=';
+                try {
+                    const res = await fetch(proxy + encodeURIComponent(baseUrl));
+                    const text = await res.text();
+                    const xml = new DOMParser().parseFromString(text, 'application/xml');
+                    const recs = Array.from(xml.getElementsByTagName('Record'));
+                    const labels = recs.map(r => r.getAttribute('Date'));
+                    const data = recs.map(r => parseFloat(r.getElementsByTagName('Value')[0].textContent.replace(',','.')));
+                    const ctx = document.getElementById('gbpChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: { labels, datasets: [{ label: 'GBP → RUB', data, backgroundColor: 'rgba(54,162,235,0.5)', borderColor: 'rgba(54,162,235,1)', borderWidth: 1 }] },
+                        options: { responsive: true, scales: { y: { beginAtZero: false } } }
+                    });
+                } catch {
+                    rateInfoEl.textContent = 'Ошибка при загрузке данных графика. Используйте прокси для CORS.';
+                }
+            }
+
+            convertBtn.addEventListener('click', convert);
+            loadCurrentRate();
+            drawChart();
+        });
+    </script>
+</body>
+</html>
