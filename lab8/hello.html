@@ -38,6 +38,18 @@
             </ul>
             <hr>
 
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h2 class="card-title">Цветы</h2>
+                    <ul class="list-gruop">
+                        <li v-for="(flowers, id) in flowers" class="list-group-item">
+                            {{ flowers }} <button @click="edit(id, flower)">?</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+
             <h2>Цветы</h2>
             <table class="table table-primary">
                 <thead>
