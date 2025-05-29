@@ -53,7 +53,12 @@
             }
     
             // Подсчёт статистики
-            let sum = share.reduce((a, b) => a + b, 0);
+            let sum = null;
+
+            for (i = 0; i < share.length; i++) {
+                sum += share[i];
+            }
+
             let avg = (sum / share.length).toFixed(4);
             let max = Math.max(...share).toFixed(4);
             let min = Math.min(...share).toFixed(4);
