@@ -34,8 +34,8 @@
                 <label for="amount">Сумма:</label>
                 <input type="number" id="amount" placeholder="Введите сумму">
                 <select id="direction">
-                <option value="rub-to-gbp">Рубли → Фунты</option>
-                <option value="gbp-to-rub">Фунты → Рубли</option>
+                    <option value="rub-to-gbp">Рубли → Фунты</option>
+                    <option value="gbp-to-rub">Фунты → Рубли</option>
                 </select>
                 <button id="convertBtn">Конвертировать</button>
                 <p id="result">Результат: —</p>
@@ -92,9 +92,9 @@
             const convertBtn = document.getElementById('convertBtn');
 
             // Загрузка текущего курса
-            async function loadCurrentRate() {
+            async function loadCurrentRate() { // функция в фоновом режиме
                 try {
-                    const res = await fetch('https://www.cbr-xml-daily.ru/daily_json.js');
+                    const res = await fetch('https://www.cbr-xml-daily.ru/daily_json.js'); // остановка до получения ответа
                     const data = await res.json();
                     currentRate = data.Valute.GBP.Value;
                     rateInfoEl.textContent = `Текущий курс: 1 GBP = ${currentRate.toFixed(2)} RUB`;
@@ -117,23 +117,33 @@
             // Построение графика за месяц
             async function drawChart() {
                 const end = new Date();
-                const start = new Date(end);
+                const start = new Date();
                 start.setMonth(start.getMonth() - 1);
-                const fmt = d => `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;
+                const fmt = d => `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`; // DD/MM/YYYY
                 const baseUrl = `https://www.cbr.ru/scripts/XML_dynamic.asp?date_req1=${fmt(start)}&date_req2=${fmt(end)}&VAL_NM_RQ=R01035`;
-                const proxy = 'https://api.allorigins.win/raw?url=';
+                const proxy = 'https://api.allorigins.win/raw?url='; // Прокси для обхода CORS
                 try {
-                    const res = await fetch(proxy + encodeURIComponent(baseUrl));
+                    const res = await fetch(proxy + encodeURIComponent(baseUrl)); // кодировка url внутри запроса
                     const text = await res.text();
-                    const xml = new DOMParser().parseFromString(text, 'application/xml');
-                    const recs = Array.from(xml.getElementsByTagName('Record'));
-                    const labels = recs.map(r => r.getAttribute('Date'));
-                    const data = recs.map(r => parseFloat(r.getElementsByTagName('Value')[0].textContent.replace(',','.')));
+                    const xml = new DOMParser().parseFromString(text, 'application/xml'); // Превращаем XML-строку в объект Document, понятный JavaScript
+                    const recs = Array.from(xml.getElementsByTagName('Record')); //  элементы с курсами
+                    const labels = recs.map(r => r.getAttribute('Date')); // список дат
+                    const data = recs.map(r => parseFloat(r.getElementsByTagName('Value')[0].textContent.replace(',','.'))); // список значений курса
                     const ctx = document.getElementById('gbpChart').getContext('2d');
                     new Chart(ctx, {
                         type: 'bar',
-                        data: { labels, datasets: [{ label: 'GBP → RUB', data, backgroundColor: 'rgba(54,162,235,0.5)', borderColor: 'rgba(54,162,235,1)', borderWidth: 1 }] },
-                        options: { responsive: true, scales: { y: { beginAtZero: false } } }
+                        data: {
+                            labels, 
+                            datasets: [{ label: 'GBP → RUB', 
+                            data, 
+                            backgroundColor: 'rgba(54,162,235,0.5)', 
+                            borderColor: 'rgba(54,162,235,1)', 
+                            borderWidth: 1 }] 
+                        },
+                        options: {
+                            responsive: true, // автоматическое подстраивание под ширину 
+                            scales: { y: { beginAtZero: false } } 
+                        }
                     });
                 } catch {
                     rateInfoEl.textContent = 'Ошибка при загрузке данных графика. Используйте прокси для CORS.';

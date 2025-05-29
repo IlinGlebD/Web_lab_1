@@ -12,24 +12,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Поднятие кнопки над подвалом
-        const footerRect = footer.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
+        const footerRect = footer.getBoundingClientRect(); // координаты и размеры footer
+        const windowHeight = window.innerHeight; // высота видимой области окна браузера
 
         if (footerRect.top < windowHeight) {
             scrollBtn.style.bottom = (windowHeight - footerRect.top + 20) + 'px';
         } else {
             scrollBtn.style.bottom = '15px';
-        }
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-    const links = document.querySelectorAll('.menu-link');
-    const current = location.pathname.split("/").pop();
-
-    links.forEach(link => {
-        if (link.getAttribute('href') === current) {
-        link.classList.add('active');
-        }
+    }
     });
 });

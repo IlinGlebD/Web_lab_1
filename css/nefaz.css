@@ -89,13 +89,13 @@ a:hover {
     padding: 15px 20px;
     color: #003366;
     text-decoration: none;
-    transition: background-color 0.2s, color 0.2s;
+    transition: 0.3s;
 }
   
 .sidebar a:hover {
-    background-color: #c0d4e4;
     color: #000;
-  }
+    background-color: #99bbd8;
+}
   
 .sidebar a.active {
     background-color: #99bbd8;
