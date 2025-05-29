@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="../favicon/favicon-32x32.png" type="image/x-icon">
 
     <style>
-        #weather-info {
+        .weather-info {
             margin: 20px;
             padding: 15px;
             border: 2px solid #444;
@@ -20,11 +20,11 @@
             font-family: Arial, sans-serif;
         }
 
-        #weather-info h2 {
+        .weather-info h2 {
             color: #003366;
         }
 
-        #weather-info p {
+        .weather-info p {
             margin: 6px 0;
         }
     </style>
@@ -60,7 +60,8 @@
                         }
                     });
 
-                    const infoDiv = document.getElementById('weather-info');
+                    const infoDiv = document.createElement('div');
+                    infoDiv.className = 'weather-info';
                     if (weatherData.length > 0) {
                         infoDiv.innerHTML = `
                         <h2>Погода в Новосибирске на сегодня</h2>
@@ -70,6 +71,7 @@
                     } else {
                         infoDiv.innerHTML = '<p style="color:red;">Данные на сегодня недоступны</p>';
                     }
+                    document.querySelector('main').appendChild(infoDiv);
                 })
         }
     </script>
@@ -83,8 +85,6 @@
         <button id="button" onclick="getWeather()" style="height: 50px; width: 300px; background-color: aqua; margin: 20px;">
             Узнать погоду в Новосибирске
         </button>
-
-        <div id="weather-info"></div>
     </main>
 
     <footer>

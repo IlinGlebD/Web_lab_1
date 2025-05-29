@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="../favicon/favicon-32x32.png" type="image/x-icon">
 
     <style>
-        #euro-info {
+        .euro-info {
             margin: 20px;
             padding: 15px;
             border: 2px solid #008080;
@@ -20,19 +20,19 @@
             font-family: Arial, sans-serif;
         }
 
-        #euro-info h2 {
+        .euro-info h2 {
             color: #006666;
         }
 
-        #euro-info p {
+        .euro-info p {
             margin: 6px 0;
-            font-size: 1em;
+            font-size: 20px;
         }
 
         a.source-link {
             margin-top: 10px;
             display: inline-block;
-            font-size: 0.9em;
+            font-size: 15px;
             color: #004080;
         }
     </style>
@@ -57,7 +57,8 @@
                     const diff = (currentRate - previousRate).toFixed(4);
                     const trend = diff > 0 ? "Курс поднялся 📈" : diff < 0 ? "Курс опустился 📉" : "Курс не изменился";
 
-                    const infoDiv = document.getElementById('euro-info');
+                    const infoDiv = document.createElement('div');
+                    infoDiv.className = 'euro-info';
                     infoDiv.innerHTML = `
                         <h2>Курс евро</h2>
                         <p><strong>Дата:</strong> ${date}</p>
@@ -68,6 +69,7 @@
                             Источник данных — Центральный банк РФ
                         </a>
                     `;
+                    document.querySelector('main').appendChild(infoDiv);
                 })
         }
     </script>
@@ -81,8 +83,6 @@
         <button id="button" onclick="getEuroExchangeRate()" style="height: 50px; width: 200px; background-color: aqua; margin: 20px;">
             Получить курс евро
         </button>
-
-        <div id="euro-info"></div>
     </main>
 
     <footer>
